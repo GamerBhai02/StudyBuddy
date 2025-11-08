@@ -10,6 +10,7 @@ from app.routes import upload, study_plan, lessons, test_gemini, practice, srs, 
 from app.routes import placement_practice
 from app.routes import placement
 from app.routes import youtube
+from app.routes import peer
 import traceback
 
 # Create database tables
@@ -64,6 +65,7 @@ app.include_router(chatbot.router)  # Phase 3
 app.include_router(placement.router)
 app.include_router(placement_practice.router)
 app.include_router(youtube.router) 
+app.include_router(peer.router)
 
 @app.get("/")
 async def root():

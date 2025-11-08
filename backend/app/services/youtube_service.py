@@ -1,294 +1,102 @@
-import os
-import requests
+import json
+from pathlib import Path
 from typing import List, Dict, Optional
-from functools import lru_cache
 
 class YouTubeResourceService:
     """
-    Dynamic YouTube recommendations using YouTube Data API v3
-    FREE with 10,000 units/day quota
+    Simple YouTube resource service using curated JSON files
+    100% FREE - No API needed
     """
     
     def __init__(self):
-        self.api_key = os.getenv("YOUTUBE_API_KEY")
-        self.base_url = "https://www.googleapis.com/youtube/v3"
-        
-        # Cache for reducing API calls
-        self.cache = {}
-        
-        # Curated channel IDs for quality filtering
-        self.trusted_channels = {
-            'dsa': [
-                'UC-sxSmmDR_IVXwW_YFJr6jA',  # Take U Forward (Striver)
-                'UCWr0mx597DnSGLFk1WfvSkQ',  # Abdul Bari
-                'UCZCFT11CWBi3MHNlGf019nw',  # Abdul Bari (alternate)
-                'UCEBb1b_L6zDS3xTUrIALZOw',  # William Fiset
-            ],
-            'system_design': [
-                'UCRPMAqdtSgd0Ipeef7iFsKw',  # Gaurav Sen
-                'UC9vLsnF6QPYuH3q5fg9Dung',  # System Design Interview
-            ]
-        }
+        self.data_dir = Path(__file__).parent.parent / "data" / "youtube_resources"
+        self.resources_cache = {}
+        self._load_all_resources()
     
-    def search_videos(
+    def _load_all_resources(self):
+        """Load all YouTube resource files"""
+        
+        if not self.data_dir.exists():
+            print(f"⚠️  YouTube resources directory not found: {self.data_dir}")
+            print(f"   Creating directory...")
+            self.data_dir.mkdir(parents=True, exist_ok=True)
+            return
+        
+        loaded_count = 0
+        for json_file in self.data_dir.glob("*.json"):
+            try:
+                with open(json_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    topic = data.get("topic", "").lower()
+                    self.resources_cache[topic] = data.get("resources", [])
+                    loaded_count += 1
+                    print(f"  ✓ Loaded: {data.get('topic')} ({len(data.get('resources', []))} videos)")
+            except Exception as e:
+                print(f"  ✗ Error loading {json_file.name}: {e}")
+        
+        if loaded_count > 0:
+            print(f"✓ Loaded YouTube resources for {loaded_count} topics")
+        else:
+            print("⚠️  No YouTube resource files found. Create JSON files in app/data/youtube_resources/")
+    
+    def get_topic_videos(
         self, 
         topic: str, 
         max_results: int = 3,
         difficulty: Optional[str] = None
     ) -> List[Dict]:
         """
-        Search YouTube dynamically for best videos on a topic
+        Get YouTube videos for a topic
         """
         
-        # Check cache first
-        cache_key = f"{topic}_{max_results}_{difficulty}"
-        if cache_key in self.cache:
-            print(f"  ✓ Using cached results for: {topic}")
-            return self.cache[cache_key]
+        topic_lower = topic.lower().replace(' ', '_')
         
-        if not self.api_key:
-            print("⚠️  YouTube API key not found. Using fallback.")
-            return self._fallback_search(topic)
+        print(f"\n🔍 Searching for: {topic}")
+        print(f"   Looking for key: {topic_lower}")
+        print(f"   Available topics: {list(self.resources_cache.keys())}")
         
-        try:
-            # Build search query
-            search_query = self._build_search_query(topic, difficulty)
-            
-            # Call YouTube API
-            params = {
-                'part': 'snippet',
-                'q': search_query,
-                'type': 'video',
-                'maxResults': max_results * 2,  # Get extras to filter
-                'key': self.api_key,
-                'order': 'relevance',
-                'videoDuration': 'medium',  # 4-20 minutes
-                'videoDefinition': 'high',
-                'relevanceLanguage': 'en',
-            }
-            
-            response = requests.get(
-                f"{self.base_url}/search",
-                params=params,
-                timeout=10
-            )
-            
-            if response.status_code == 200:
-                data = response.json()
-                videos = self._process_search_results(data, topic)
-                
-                # Cache results
-                self.cache[cache_key] = videos[:max_results]
-                
-                print(f"  ✓ Found {len(videos)} videos for: {topic}")
-                return videos[:max_results]
-            else:
-                print(f"  ✗ YouTube API error: {response.status_code}")
-                return self._fallback_search(topic)
-                
-        except Exception as e:
-            print(f"  ✗ YouTube search failed: {e}")
-            return self._fallback_search(topic)
-    
-    def _build_search_query(self, topic: str, difficulty: Optional[str]) -> str:
-        """Build optimized search query"""
+        # Try exact match
+        if topic_lower in self.resources_cache:
+            print(f"   ✓ Found exact match!")
+            videos = self.resources_cache[topic_lower]
+        else:
+            # Try fuzzy match
+            print(f"   Trying fuzzy match...")
+            videos = self._fuzzy_search(topic)
         
-        # Base query
-        query = f"{topic} tutorial programming"
-        
-        # Add difficulty modifier
-        if difficulty == 'beginner':
-            query += " for beginners explained simple"
-        elif difficulty == 'intermediate':
-            query += " interview questions"
-        elif difficulty == 'advanced':
-            query += " advanced techniques"
-        
-        # Add quality indicators
-        query += " striver abdul bari"
-        
-        return query
-    
-    def _process_search_results(self, data: Dict, topic: str) -> List[Dict]:
-        """Process and filter YouTube API results"""
-        
-        videos = []
-        
-        for item in data.get('items', []):
-            snippet = item.get('snippet', {})
-            
-            # Extract video info
-            video = {
-                'title': snippet.get('title', 'Unknown'),
-                'creator': snippet.get('channelTitle', 'Unknown'),
-                'url': f"https://www.youtube.com/watch?v={item['id']['videoId']}",
-                'thumbnail': snippet.get('thumbnails', {}).get('high', {}).get('url', ''),
-                'description': snippet.get('description', '')[:200] + '...',
-                'published_at': snippet.get('publishedAt', ''),
-                'channel_id': snippet.get('channelId', ''),
-                'topic': topic
-            }
-            
-            # Filter quality - prefer trusted channels
-            if self._is_quality_video(video):
-                videos.append(video)
-        
-        return videos
-    
-    def _is_quality_video(self, video: Dict) -> bool:
-        """Check if video is from trusted source"""
-        
-        # Check if from trusted channel
-        for category, channels in self.trusted_channels.items():
-            if video['channel_id'] in channels:
-                return True
-        
-        # Check title quality indicators
-        quality_keywords = [
-            'tutorial', 'explained', 'complete', 'course',
-            'interview', 'leetcode', 'dsa', 'algorithm'
-        ]
-        
-        title_lower = video['title'].lower()
-        return any(keyword in title_lower for keyword in quality_keywords)
-    
-    def _fallback_search(self, topic: str) -> List[Dict]:
-        """Fallback when API fails or key missing"""
-        
-        # Return generic recommendations
-        return [
-            {
-                'title': f"{topic} Tutorial - Take U Forward",
-                'creator': "Take U Forward (Striver)",
-                'url': f"https://www.youtube.com/results?search_query={topic}+striver",
-                'description': f"Search YouTube for {topic} by Striver",
-                'thumbnail': '',
-                'topic': topic
-            },
-            {
-                'title': f"{topic} Explained - Abdul Bari",
-                'creator': "Abdul Bari",
-                'url': f"https://www.youtube.com/results?search_query={topic}+abdul+bari",
-                'description': f"Search YouTube for {topic} by Abdul Bari",
-                'thumbnail': '',
-                'topic': topic
-            }
-        ]
-    
-    def get_video_details(self, video_ids: List[str]) -> List[Dict]:
-        """
-        Get detailed info for specific videos
-        Useful for getting duration, view count, etc.
-        """
-        
-        if not self.api_key or not video_ids:
+        if not videos:
+            print(f"   ✗ No videos found for: {topic}")
             return []
         
-        try:
-            params = {
-                'part': 'snippet,contentDetails,statistics',
-                'id': ','.join(video_ids),
-                'key': self.api_key
-            }
-            
-            response = requests.get(
-                f"{self.base_url}/videos",
-                params=params,
-                timeout=10
-            )
-            
-            if response.status_code == 200:
-                data = response.json()
-                return self._process_video_details(data)
-            
-        except Exception as e:
-            print(f"  ✗ Failed to get video details: {e}")
+        # Filter by difficulty if specified
+        if difficulty:
+            videos = [v for v in videos if difficulty.lower() in v.get('difficulty', '')]
+        
+        print(f"   ✓ Returning {min(len(videos), max_results)} videos")
+        
+        # Limit results
+        return videos[:max_results]
+    
+    def _fuzzy_search(self, topic: str) -> List[Dict]:
+        """Search for topic with fuzzy matching"""
+        
+        topic_lower = topic.lower()
+        
+        # Try partial matches
+        for key in self.resources_cache.keys():
+            if topic_lower in key or key in topic_lower:
+                print(f"   ✓ Fuzzy match found: {key}")
+                return self.resources_cache[key]
+        
+        # Try word-by-word match
+        topic_words = topic_lower.split()
+        for key in self.resources_cache.keys():
+            if any(word in key for word in topic_words):
+                print(f"   ✓ Word match found: {key}")
+                return self.resources_cache[key]
         
         return []
     
-    def _process_video_details(self, data: Dict) -> List[Dict]:
-        """Process video details from API"""
-        
-        videos = []
-        
-        for item in data.get('items', []):
-            snippet = item.get('snippet', {})
-            statistics = item.get('statistics', {})
-            content = item.get('contentDetails', {})
-            
-            video = {
-                'id': item.get('id'),
-                'title': snippet.get('title'),
-                'creator': snippet.get('channelTitle'),
-                'url': f"https://www.youtube.com/watch?v={item['id']}",
-                'duration': self._parse_duration(content.get('duration', 'PT0S')),
-                'view_count': int(statistics.get('viewCount', 0)),
-                'like_count': int(statistics.get('likeCount', 0)),
-                'thumbnail': snippet.get('thumbnails', {}).get('high', {}).get('url'),
-                'description': snippet.get('description', '')[:200]
-            }
-            
-            videos.append(video)
-        
-        return videos
-    
-    def _parse_duration(self, duration: str) -> str:
-        """Parse ISO 8601 duration to readable format"""
-        import re
-        
-        # Parse PT1H30M45S format
-        match = re.match(r'PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?', duration)
-        
-        if not match:
-            return "Unknown"
-        
-        hours, minutes, seconds = match.groups()
-        
-        parts = []
-        if hours:
-            parts.append(f"{hours}h")
-        if minutes:
-            parts.append(f"{minutes}m")
-        if seconds and not hours:
-            parts.append(f"{seconds}s")
-        
-        return ' '.join(parts) if parts else "0m"
-    
-    @lru_cache(maxsize=100)
-    def get_channel_quality_score(self, channel_id: str) -> float:
-        """Get quality score for a channel (cached)"""
-        
-        if not self.api_key:
-            return 0.5
-        
-        try:
-            params = {
-                'part': 'statistics',
-                'id': channel_id,
-                'key': self.api_key
-            }
-            
-            response = requests.get(
-                f"{self.base_url}/channels",
-                params=params,
-                timeout=5
-            )
-            
-            if response.status_code == 200:
-                data = response.json()
-                stats = data['items'][0]['statistics']
-                
-                # Calculate quality score
-                subscribers = int(stats.get('subscriberCount', 0))
-                videos = int(stats.get('videoCount', 1))
-                views = int(stats.get('viewCount', 0))
-                
-                # Higher score = better quality
-                score = min(1.0, (subscribers / 100000) * 0.5 + (views / videos / 10000) * 0.5)
-                
-                return score
-        
-        except Exception:
-            pass
-        
-        return 0.5
+    def get_all_topics(self) -> List[str]:
+        """Get list of all topics with resources"""
+        return [topic.replace('_', ' ').title() for topic in self.resources_cache.keys()]
