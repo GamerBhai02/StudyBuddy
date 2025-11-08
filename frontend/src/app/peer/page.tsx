@@ -10,6 +10,8 @@ import {
 export default function PeerLearningDashboard() {
   const router = useRouter();
   const [stats, setStats] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     loadStats();
@@ -18,10 +20,33 @@ export default function PeerLearningDashboard() {
   const loadStats = async () => {
     try {
       const response = await fetch('http://localhost:8000/api/peer/stats');
-      const data = await response.json();
-      setStats(data);
+      if (response.ok) {
+        const data = await response.json();
+        setStats(data);
+      } else {
+        setError(true);
+        // Use default stats if API fails
+        setStats({
+          active_partners: 0,
+          doubts_resolved: 0,
+          groups_joined: 0,
+          challenges_completed: 0,
+          current_streak: 0
+        });
+      }
     } catch (error) {
       console.error('Failed to load stats:', error);
+      setError(true);
+      // Use default stats
+      setStats({
+        active_partners: 0,
+        doubts_resolved: 0,
+        groups_joined: 0,
+        challenges_completed: 0,
+        current_streak: 0
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -82,6 +107,17 @@ export default function PeerLearningDashboard() {
     }
   ];
 
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-linear-to-br from-indigo-50 via-purple-50 to-pink-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading peer learning...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-linear-to-br from-indigo-50 via-purple-50 to-pink-50 py-12 px-4">
       <div className="max-w-7xl mx-auto">
@@ -96,6 +132,11 @@ export default function PeerLearningDashboard() {
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Learn together, grow together. Connect with peers, solve problems collaboratively, and stay motivated.
           </p>
+          {error && (
+            <p className="text-sm text-yellow-600 mt-2">
+              ⚠️ Using demo mode - Backend connection needed for full features
+            </p>
+          )}
         </div>
 
         {/* Stats Bar */}

@@ -11,6 +11,12 @@ from app.routes import placement_practice
 from app.routes import placement
 from app.routes import youtube
 from app.routes import peer
+from app.models import models, placement_models, peer_models  # Add peer_models
+from app.routes import (
+    upload, study_plan, lessons, test_gemini, practice, 
+    srs, exam_day, chatbot, placement, placement_practice, 
+    youtube, peer  # Add peer
+)
 import traceback
 
 # Create database tables
@@ -65,6 +71,7 @@ app.include_router(chatbot.router)  # Phase 3
 app.include_router(placement.router)
 app.include_router(placement_practice.router)
 app.include_router(youtube.router) 
+app.include_router(peer.router)
 app.include_router(peer.router)
 
 @app.get("/")

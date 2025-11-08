@@ -62,13 +62,7 @@ export default function DashboardPage() {
           >
             Create Study Plan
           </button>
-          <button
-  onClick={() => router.push('/peer')}
-  className="px-6 py-3 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition flex items-center shadow-lg"
->
-  <Users className="w-5 h-5 mr-2" />
-  Peer Learning
-</button>
+          
         </div>
       </div>
     );
@@ -83,6 +77,13 @@ export default function DashboardPage() {
           <p className="text-gray-600">
             {data.days_remaining} days until your exam
           </p>
+          <button
+            onClick={() => router.push('/peer')}
+            className="px-6 py-3 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition flex items-center shadow-lg"
+          >
+            <Users className="w-5 h-5 mr-2" />
+            Peer Learning
+          </button>
         </div>
 
         {/* Stats Grid */}

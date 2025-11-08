@@ -30,15 +30,7 @@ export default function PracticeSessions() {
     }
   }, [activeSession, timeLeft]);
 
-  const loadSessions = async () => {
-    try {
-      const response = await fetch('http://localhost:8000/api/peer/sessions');
-      const data = await response.json();
-      setSessions(data.sessions);
-    } catch (error) {
-      console.error('Failed to load sessions:', error);
-    }
-  };
+  
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -50,6 +42,47 @@ export default function PracticeSessions() {
     setActiveSession(sessionId);
     setTimeLeft(600);
   };
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(false);
+
+const loadSessions = async () => {
+  try {
+    const response = await fetch('http://localhost:8000/api/peer/sessions');
+    if (response.ok) {
+      const data = await response.json();
+      setSessions(data.sessions || []);
+    } else {
+      setError(true);
+      setSessions(DEMO_SESSIONS); // Use hardcoded demo data
+    }
+  } catch (error) {
+    console.error('Failed to load sessions:', error);
+    setError(true);
+    setSessions(DEMO_SESSIONS);
+  } finally {
+    setLoading(false);
+  }
+};
+
+// Add demo data at top
+const DEMO_SESSIONS = [
+  {
+    id: 1,
+    type: "dsa_practice",
+    problem: "Two Sum Problem",
+    scheduled: "Today 6:00 PM",
+    participants: 4,
+    status: "upcoming"
+  },
+  {
+    id: 2,
+    type: "revision_challenge",
+    problem: "5 Questions in 20 Minutes",
+    scheduled: "Tomorrow 7:00 PM",
+    participants: 5,
+    status: "upcoming"
+  }
+];
 
   return (
     <div className="min-h-screen bg-linear-to-br from-orange-50 to-red-50 py-12 px-4">
@@ -205,3 +238,5 @@ export default function PracticeSessions() {
     </div>
   );
 }
+
+
