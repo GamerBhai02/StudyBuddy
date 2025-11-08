@@ -78,7 +78,6 @@ export default function PlacementWelcome() {
             View Existing Profiles →
             </button>
         </div>
-        </div>
 
     </div>
     
