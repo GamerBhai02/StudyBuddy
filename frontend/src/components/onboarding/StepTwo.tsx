@@ -3,10 +3,11 @@
 import { useState } from 'react';
 import { uploadPDF, extractTopics } from '@/lib/api';
 import { Upload, FileText, Loader2 } from 'lucide-react';
+import { BasicInfo, ExtractedData } from '@/lib/types';
 
 interface StepTwoProps {
-  basicInfo: any;
-  onNext: (data: any) => void;
+  basicInfo: BasicInfo;
+  onNext: (data: ExtractedData) => void;
   onBack: () => void;
 }
 

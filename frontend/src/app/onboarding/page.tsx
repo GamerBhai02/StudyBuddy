@@ -4,24 +4,25 @@ import { useState } from 'react';
 import StepOne from '@/components/onboarding/StepOne';
 import StepTwo from '@/components/onboarding/StepTwo';
 import StepThree from '@/components/onboarding/StepThree';
+import { BasicInfo, ExtractedData } from '@/lib/types';
 
 export default function OnboardingPage() {
-  const [step, setStep] = useState(1);
-  const [basicInfo, setBasicInfo] = useState(null);
-  const [extractedData, setExtractedData] = useState(null);
+  const [step, setStep] = useState<number>(1);
+  const [basicInfo, setBasicInfo] = useState<BasicInfo | null>(null);
+  const [extractedData, setExtractedData] = useState<ExtractedData | null>(null);
 
-  const handleStepOne = (data: any) => {
+  const handleStepOne = (data: BasicInfo) => {
     setBasicInfo(data);
     setStep(2);
   };
 
-  const handleStepTwo = (data: any) => {
+  const handleStepTwo = (data: ExtractedData) => {
     setExtractedData(data);
     setStep(3);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 py-12 px-4">
       <div className="max-w-3xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           {/* Progress bar */}
@@ -62,3 +63,4 @@ export default function OnboardingPage() {
     </div>
   );
 }
+

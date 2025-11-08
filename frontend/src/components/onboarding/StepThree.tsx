@@ -1,12 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { Topic } from '@/lib/types';
+import { Topic, BasicInfo } from '@/lib/types';
 import { createStudyPlan, generatePlan } from '@/lib/api';
 import { useRouter } from 'next/navigation';
 
 interface StepThreeProps {
-  basicInfo: any;
+  basicInfo: BasicInfo;
   topics: Topic[];
   onBack: () => void;
 }

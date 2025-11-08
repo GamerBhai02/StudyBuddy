@@ -15,6 +15,19 @@ export interface StudyPlanData {
   target_grade: string;
 }
 
+export interface BasicInfo {
+  subject: string;
+  exam_type: string;
+  exam_date: string;
+  daily_hours: string;
+  target_grade: string;
+}
+
+export interface ExtractedData {
+  extractedText: string;
+  topics: Topic[];
+}
+
 export interface DashboardData {
   exam_date: string;
   days_remaining: number;

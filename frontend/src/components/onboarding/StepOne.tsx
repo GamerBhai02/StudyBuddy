@@ -1,18 +1,20 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { Calendar } from 'lucide-react';
+import { BasicInfo } from '@/lib/types';
 
 interface StepOneProps {
-  onNext: (data: any) => void;
+  onNext: (data: BasicInfo) => void;
 }
 
 export default function StepOne({ onNext }: StepOneProps) {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm<BasicInfo>();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: BasicInfo) => {
     onNext(data);
   };
+
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
