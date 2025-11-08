@@ -1,5 +1,5 @@
 'use client';
-
+import Chatbot from '@/components/ChatBot';
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { getDashboard } from '@/lib/api';
@@ -229,6 +229,7 @@ export default function DashboardPage() {
             </div>
             <p className="text-purple-100">Check your spaced repetition schedule for optimal retention</p>
           </button>
+           {planId && <Chatbot planId={parseInt(planId)} userId={1} />}
         </div>
       </div>
     </div>

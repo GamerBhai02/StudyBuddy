@@ -5,8 +5,9 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 30000, // 30 second timeout
+  timeout: 30000,
 });
+
 
 // Add response interceptor for better error handling
 api.interceptors.response.use(
@@ -223,5 +224,37 @@ export const markTopicForReview = async (topicId: number, userId: number = 1) =>
 };
 
 
+
+export const askChatbot = async (
+  question: string,
+  planId: number,
+  userId: number = 1
+) => {
+  const response = await api.post('/api/chatbot/ask', null, {
+    params: {
+      question,
+      plan_id: planId,
+      user_id: userId
+    }
+  });
+  return response.data;
+};
+
+export const getChatHistory = async (userId: number, planId: number) => {
+  const response = await api.get(`/api/chatbot/history/${userId}/${planId}`);
+  return response.data;
+};
+
+export const clearChatHistory = async (userId: number, planId: number) => {
+  const response = await api.delete(`/api/chatbot/history/${userId}/${planId}`);
+  return response.data;
+};
+
+export const getQuickHelp = async (topic: string, helpType: string) => {
+  const response = await api.get('/api/chatbot/quick-help', {
+    params: { topic, help_type: helpType }
+  });
+  return response.data;
+};
 
 export default api;
