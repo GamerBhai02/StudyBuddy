@@ -1,4 +1,5 @@
 from pydantic_settings import BaseSettings
+from pydantic import ConfigDict
 
 class Settings(BaseSettings):
     DATABASE_URL: str
@@ -15,7 +16,9 @@ class Settings(BaseSettings):
     CHATBOT_MAX_HISTORY: int | None = None
     CHATBOT_CONTEXT_LENGTH: int | None = None
     
-    class Config:
-        env_file = ".env"
+    model_config = ConfigDict(
+        env_file=".env",
+        extra="ignore"
+    )
 
 settings = Settings()
