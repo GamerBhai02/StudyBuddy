@@ -58,7 +58,7 @@ export default function DashboardPage() {
           <p className="text-gray-600 mb-6">Please create a study plan first</p>
           <button
             onClick={() => router.push('/onboarding')}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="px-6 py-3 bg-blue-600 text-black rounded-lg hover:bg-blue-700"
           >
             Create Study Plan
           </button>
@@ -79,7 +79,7 @@ export default function DashboardPage() {
           </p>
           <button
             onClick={() => router.push('/peer')}
-            className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition flex items-center shadow-lg"
+            className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-black rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition flex items-center shadow-lg"
           >
             <Users className="w-5 h-5 mr-2" />
             Peer Learning
@@ -138,7 +138,7 @@ export default function DashboardPage() {
               <p className="text-gray-600 mb-4">No tasks scheduled for today</p>
               <button
                 onClick={() => router.push(`/practice/select?planId=${planId}`)}
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                className="px-6 py-3 bg-blue-600 text-black rounded-lg hover:bg-blue-700 transition"
               >
                 Start Practice Session
               </button>
@@ -178,7 +178,7 @@ export default function DashboardPage() {
                   {!task.completed && (
                     <button 
                       onClick={() => handleStartSession(task.topic_id, task.topic)}
-                      className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold ml-4"
+                      className="px-6 py-2 bg-blue-600 text-black rounded-lg hover:bg-blue-700 transition font-semibold ml-4"
                     >
                       Start
                     </button>
@@ -193,43 +193,43 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <button
             onClick={() => router.push(`/practice/select?planId=${planId}`)}
-            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
+            className="bg-gradient-to-r from-blue-500 to-blue-600 text-black p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
           >
             <div className="flex items-center mb-3">
               <Target className="w-8 h-8 mr-3" />
               <h3 className="text-xl font-bold">Practice Questions</h3>
             </div>
-            <p className="text-blue-100">Test your knowledge with AI-generated MCQs and written questions</p>
+            <p className="text-blue-900">Test your knowledge with AI-generated MCQs and written questions</p>
           </button>
 
           <button
             onClick={() => router.push(`/practice/weak-topics?planId=${planId}`)}
-            className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
+            className="bg-gradient-to-r from-orange-500 to-red-500 text-black p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
           >
             <div className="flex items-center mb-3">
               <TrendingUp className="w-8 h-8 mr-3" />
               <h3 className="text-xl font-bold">Weak Topics</h3>
             </div>
-            <p className="text-orange-100">Focus on areas that need improvement and boost your mastery</p>
+            <p className="text-orange-900">Focus on areas that need improvement and boost your mastery</p>
           </button>
 
           {/* In dashboard/page.tsx, add this quick action button: */}
 
           <button
             onClick={() => router.push(`/exam-day?planId=${planId}`)}
-            className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
+            className="bg-gradient-to-r from-red-500 to-orange-500 text-black p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
           >
             <div className="flex items-center mb-3">
               <Zap className="w-8 h-8 mr-3" />
               <h3 className="text-xl font-bold">Exam Day Prep</h3>
             </div>
-            <p className="text-orange-100">Last-minute revision and confidence boost</p>
+            <p className="text-orange-900">Last-minute revision and confidence boost</p>
           </button>
 
 
           <button
             onClick={() => router.push(`/practice/reviews?planId=${planId}`)}
-            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
+            className="bg-gradient-to-r from-purple-500 to-pink-500 text-black p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
           >
             <div className="flex items-center mb-3">
               <Brain className="w-8 h-8 mr-3" />
