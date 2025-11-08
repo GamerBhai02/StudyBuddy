@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { getDashboard } from '@/lib/api';
 import { DashboardData } from '@/lib/types';
-import { Calendar, CheckCircle, Clock, TrendingUp, BookOpen, Target, Brain } from 'lucide-react';
+import { Calendar, CheckCircle, Clock, TrendingUp, BookOpen, Target, Brain, Zap } from 'lucide-react';
 
 export default function DashboardPage() {
   const searchParams = useSearchParams();
@@ -204,6 +204,20 @@ export default function DashboardPage() {
             </div>
             <p className="text-orange-100">Focus on areas that need improvement and boost your mastery</p>
           </button>
+
+          {/* In dashboard/page.tsx, add this quick action button: */}
+
+          <button
+            onClick={() => router.push(`/exam-day?planId=${planId}`)}
+            className="bg-linear-to-r from-red-500 to-orange-500 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
+          >
+            <div className="flex items-center mb-3">
+              <Zap className="w-8 h-8 mr-3" />
+              <h3 className="text-xl font-bold">Exam Day Prep</h3>
+            </div>
+            <p className="text-orange-100">Last-minute revision and confidence boost</p>
+          </button>
+
 
           <button
             onClick={() => router.push(`/practice/reviews?planId=${planId}`)}
