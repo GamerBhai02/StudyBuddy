@@ -124,7 +124,7 @@ export default function PeerLearningDashboard() {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full mb-4">
-            <Users className="w-10 h-10 text-white" />
+            <Users className="w-10 h-10 text-black" />
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Peer Learning Hub
@@ -178,7 +178,7 @@ export default function PeerLearningDashboard() {
               <div className={`h-2 bg-gradient-to-r ${feature.color}`}></div>
               <div className="p-8">
                 <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                  <feature.icon className="w-8 h-8 text-white" />
+                  <feature.icon className="w-8 h-8 text-black" />
                 </div>
                 
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -202,7 +202,7 @@ export default function PeerLearningDashboard() {
         </div>
 
         {/* Quick Actions */}
-        <div className="mt-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 text-white shadow-xl">
+        <div className="mt-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 text-black shadow-xl">
           <h2 className="text-2xl font-bold mb-4">🚀 Quick Start Guide</h2>
           <div className="grid md:grid-cols-3 gap-6">
             <div>
