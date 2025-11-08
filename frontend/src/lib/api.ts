@@ -256,5 +256,18 @@ export const getQuickHelp = async (topic: string, helpType: string) => {
   });
   return response.data;
 };
+// Placement APIs
+export const getCompanyQuestions = async (companyName: string, role: string) => {
+  const response = await api.get(`/api/placement/company-questions/${companyName}`, {
+    params: { role }
+  });
+  return response.data;
+};
+
+export const getAvailableCompanies = async () => {
+  const response = await api.get('/api/placement/available-companies');
+  return response.data;
+};
+
 
 export default api;
