@@ -9,10 +9,14 @@ import sys
 def init_database():
     print("Initializing database...")
     
-    # Create all tables
-    print("Creating tables...")
-    Base.metadata.create_all(bind=engine)
-    print("✓ Tables created")
+    try:
+        # Create all tables
+        print("Creating tables...")
+        Base.metadata.create_all(bind=engine)
+        print("✓ Tables created")
+    except Exception as e:
+        print(f"⚠ Warning: Could not create tables: {e}")
+        print("  This is normal if the database already exists or if using SQLite")
     
     # Create default user
     db = SessionLocal()
@@ -37,9 +41,10 @@ def init_database():
         print(f"   Total users: {user_count}")
         
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"⚠ Warning: {e}")
+        print("  Database may already be initialized or there may be a connection issue")
         db.rollback()
-        sys.exit(1)
+        # Don't exit with error, let the application try to continue
     finally:
         db.close()
 

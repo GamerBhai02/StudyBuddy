@@ -15,6 +15,7 @@ if [ ! -f "backend/.env" ]; then
     cat > backend/.env << 'EOF'
 DATABASE_URL=sqlite:///./studybuddy.db
 SECRET_KEY=your-secret-key-change-this-in-production
+GEMINI_API_KEY=your-gemini-api-key
 MISTRAL_API_KEY=your-mistral-api-key
 GROQ_API_KEY=your-groq-api-key
 GOOGLE_API_KEY=your-google-api-key
