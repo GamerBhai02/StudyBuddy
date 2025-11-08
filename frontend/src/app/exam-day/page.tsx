@@ -63,10 +63,10 @@ export default function ExamDayPage() {
   const isExamTomorrow = daysRemaining === 1;
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-purple-50 via-blue-50 to-indigo-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50 py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="bg-linear-to-r from-purple-600 to-indigo-600 rounded-2xl p-8 text-white mb-8 shadow-xl">
+        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-8 text-white mb-8 shadow-xl">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-4xl font-bold mb-2 flex items-center">
@@ -94,25 +94,25 @@ export default function ExamDayPage() {
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-              <div className="text-center p-4 bg-linear-to-br from-blue-50 to-blue-100 rounded-lg">
+              <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
                 <div className="text-3xl font-bold text-blue-600">
                   {confidenceData.total_questions_solved}
                 </div>
                 <div className="text-sm text-gray-600">Questions Solved</div>
               </div>
-              <div className="text-center p-4 bg-linear-to-br from-green-50 to-green-100 rounded-lg">
+              <div className="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg">
                 <div className="text-3xl font-bold text-green-600">
                   {confidenceData.average_score.toFixed(1)}
                 </div>
                 <div className="text-sm text-gray-600">Avg Score</div>
               </div>
-              <div className="text-center p-4 bg-linear-to-br from-purple-50 to-purple-100 rounded-lg">
+              <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg">
                 <div className="text-3xl font-bold text-purple-600">
                   {confidenceData.mastery_level}%
                 </div>
                 <div className="text-sm text-gray-600">Mastery Level</div>
               </div>
-              <div className="text-center p-4 bg-linear-to-br from-yellow-50 to-yellow-100 rounded-lg">
+              <div className="text-center p-4 bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg">
                 <div className="text-3xl font-bold text-yellow-600">
                   {confidenceData.ready_score}%
                 </div>
@@ -120,7 +120,7 @@ export default function ExamDayPage() {
               </div>
             </div>
 
-            <div className="bg-linear-to-r from-green-50 to-emerald-50 rounded-lg p-4 mb-4">
+            <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg p-4 mb-4">
               <p className="text-lg text-gray-900 font-semibold mb-2">
                 {confidenceData.motivational_message}
               </p>

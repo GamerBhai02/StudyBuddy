@@ -76,7 +76,7 @@ export default function YouTubeModal({ topic, isOpen, onClose }: YouTubeModalPro
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
       <div className="bg-white rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden shadow-2xl animate-in fade-in duration-200">
         {/* Header */}
-        <div className="bg-linear-to-r from-red-600 via-red-500 to-pink-600 text-white p-6">
+        <div className="bg-gradient-to-r from-red-600 via-red-500 to-pink-600 text-white p-6">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-2xl font-bold flex items-center">
@@ -99,7 +99,7 @@ export default function YouTubeModal({ topic, isOpen, onClose }: YouTubeModalPro
         </div>
 
         {/* Content */}
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)] bg-linear-to-b from-gray-50 to-white">
+        <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)] bg-gradient-to-b from-gray-50 to-white">
           {loading ? (
             <div className="text-center py-16">
               <div className="relative w-16 h-16 mx-auto mb-6">
@@ -160,7 +160,7 @@ export default function YouTubeModal({ topic, isOpen, onClose }: YouTubeModalPro
                             )}
                           </>
                         ) : (
-                          <div className="w-full h-full bg-linear-to-br from-red-500 via-red-600 to-pink-500 flex items-center justify-center">
+                          <div className="w-full h-full bg-gradient-to-br from-red-500 via-red-600 to-pink-500 flex items-center justify-center">
                             <Youtube className="w-16 h-16 text-white opacity-80" />
                           </div>
                         )}
@@ -202,7 +202,7 @@ export default function YouTubeModal({ topic, isOpen, onClose }: YouTubeModalPro
 
                         {/* Watch Now Button */}
                         <div className="mt-4">
-                          <span className="inline-flex items-center px-4 py-2 bg-linear-to-r from-red-500 to-pink-500 text-white rounded-lg font-semibold text-sm hover:from-red-600 hover:to-pink-600 transition shadow-md">
+                          <span className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg font-semibold text-sm hover:from-red-600 hover:to-pink-600 transition shadow-md">
                             <Play className="w-4 h-4 mr-2" />
                             Watch on YouTube
                           </span>

@@ -88,7 +88,7 @@ export default function WeakTopicsPage() {
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="bg-linear-to-r from-orange-500 to-red-500 rounded-xl p-8 text-white mb-8 shadow-lg">
+        <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-xl p-8 text-white mb-8 shadow-lg">
           <div className="flex items-center mb-4">
             <AlertTriangle className="w-12 h-12 mr-4" />
             <div>
@@ -215,7 +215,7 @@ export default function WeakTopicsPage() {
         </div>
 
         {/* Tips Section */}
-        <div className="mt-8 bg-linear-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+        <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
           <h3 className="text-lg font-bold text-gray-900 mb-3">💡 Tips to Improve Weak Topics</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
             <div className="flex items-start">

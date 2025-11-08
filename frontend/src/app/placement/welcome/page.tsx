@@ -7,12 +7,12 @@ export default function PlacementWelcome() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-green-50 to-teal-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 py-12 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
           <div className="flex items-center mb-6">
-            <div className="w-16 h-16 bg-linear-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center mr-4">
+            <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center mr-4">
               <Briefcase className="w-8 h-8 text-white" />
             </div>
             <div>
@@ -57,7 +57,7 @@ export default function PlacementWelcome() {
         <div className="text-center">
           <button
             onClick={() => router.push('/placement/create')}
-            className="px-8 py-4 bg-linear-to-r from-green-600 to-teal-600 text-white rounded-xl font-bold text-lg hover:from-green-700 hover:to-teal-700 transition shadow-lg inline-flex items-center"
+            className="px-8 py-4 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl font-bold text-lg hover:from-green-700 hover:to-teal-700 transition shadow-lg inline-flex items-center"
           >
             Create Your Preparation Plan
             <ArrowRight className="w-5 h-5 ml-2" />
@@ -72,7 +72,7 @@ export default function PlacementWelcome() {
         <div className="text-center">
         <button
             onClick={() => router.push('/placement/create')}
-            className="px-8 py-4 bg-linear-to-r from-green-600 to-teal-600 text-white rounded-xl font-bold text-lg hover:from-green-700 hover:to-teal-700 transition shadow-lg inline-flex items-center"
+            className="px-8 py-4 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl font-bold text-lg hover:from-green-700 hover:to-teal-700 transition shadow-lg inline-flex items-center"
         >
             Create Your Preparation Plan
             <ArrowRight className="w-5 h-5 ml-2" />

@@ -164,10 +164,10 @@ export default function PlacementDashboard() {
 
   // Main Dashboard
   return (
-    <div className="min-h-screen bg-linear-to-br from-green-50 to-teal-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="bg-linear-to-r from-green-600 to-teal-600 rounded-2xl p-8 text-white mb-8 shadow-xl">
+        <div className="bg-gradient-to-r from-green-600 to-teal-600 rounded-2xl p-8 text-white mb-8 shadow-xl">
           <div className="flex items-start justify-between">
             <div>
               <div className="flex items-center mb-2">
@@ -203,7 +203,7 @@ export default function PlacementDashboard() {
             </button>
             <button
               onClick={() => router.push('/peer')}
-              className="px-6 py-3 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition flex items-center shadow-lg"
+              className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition flex items-center shadow-lg"
             >
               <Users className="w-5 h-5 mr-2" />
               Find Study Partners
@@ -213,7 +213,7 @@ export default function PlacementDashboard() {
 
         {/* Roadmap Banner */}
         {!hasRoadmap && (
-          <div className="bg-linear-to-r from-blue-500 to-purple-500 rounded-xl p-6 text-white mb-8 shadow-lg">
+          <div className="bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl p-6 text-white mb-8 shadow-lg">
             <div className="flex items-start justify-between">
               <div>
                 <h3 className="text-xl font-bold mb-2 flex items-center">

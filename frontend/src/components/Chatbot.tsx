@@ -162,7 +162,7 @@ export default function Chatbot({ planId, userId = 1 }: ChatbotProps) {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 w-16 h-16 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 flex items-center justify-center z-50 hover:scale-110 animate-pulse"
+        className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 flex items-center justify-center z-50 hover:scale-110 animate-pulse"
       >
         <MessageCircle className="w-7 h-7" />
         <span className="absolute -top-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-xs font-bold animate-bounce">
@@ -176,7 +176,7 @@ export default function Chatbot({ planId, userId = 1 }: ChatbotProps) {
     <div className={`fixed bottom-6 right-6 z-50 ${isMinimized ? 'w-80' : 'w-96'} transition-all duration-300`}>
       <div className="bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col max-h-[600px]">
         {/* Header */}
-        <div className="bg-linear-to-r from-blue-600 to-purple-600 text-white p-4 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 flex items-center justify-between">
           <div className="flex items-center">
             <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mr-3">
               <Sparkles className="w-5 h-5" />
@@ -214,7 +214,7 @@ export default function Chatbot({ planId, userId = 1 }: ChatbotProps) {
         {!isMinimized && (
           <>
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-linear-to-b from-gray-50 to-white">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-white">
               {messages.map((message, index) => (
                 <div
                   key={index}
@@ -223,7 +223,7 @@ export default function Chatbot({ planId, userId = 1 }: ChatbotProps) {
                   <div
                     className={`max-w-[80%] rounded-2xl px-4 py-3 ${
                       message.role === 'user'
-                        ? 'bg-linear-to-r from-blue-600 to-purple-600 text-white'
+                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
                         : 'bg-white text-gray-900 border border-gray-200 shadow-sm'
                     }`}
                   >
@@ -261,7 +261,7 @@ export default function Chatbot({ planId, userId = 1 }: ChatbotProps) {
                   <button
                     key={index}
                     onClick={() => setInputText(prompt)}
-                    className="px-3 py-1 text-xs bg-linear-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 text-gray-700 rounded-full whitespace-nowrap transition border border-blue-200"
+                    className="px-3 py-1 text-xs bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 text-gray-700 rounded-full whitespace-nowrap transition border border-blue-200"
                   >
                     {prompt}
                   </button>
@@ -307,7 +307,7 @@ export default function Chatbot({ planId, userId = 1 }: ChatbotProps) {
                   <button
                     onClick={handleSendMessage}
                     disabled={isLoading || !inputText.trim()}
-                    className="p-3 bg-linear-to-r from-blue-600 to-purple-600 text-white rounded-full hover:from-blue-700 hover:to-purple-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:from-blue-700 hover:to-purple-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send className="w-5 h-5" />
                   </button>

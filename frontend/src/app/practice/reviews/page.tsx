@@ -184,7 +184,7 @@ export default function ReviewsPage() {
         </div>
 
         {/* Info Box */}
-        <div className="mt-8 bg-linear-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+        <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
           <h3 className="font-bold text-gray-900 mb-3 flex items-center">
             <Brain className="w-5 h-5 mr-2 text-blue-600" />
             How Spaced Repetition Works

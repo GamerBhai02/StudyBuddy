@@ -62,7 +62,7 @@ export default function StudyGroups() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-purple-50 to-pink-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <UsersRound className="w-16 h-16 text-purple-600 mx-auto mb-4" />
@@ -73,7 +73,7 @@ export default function StudyGroups() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {groups.map((group) => (
             <div key={group.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
-              <div className={`h-2 bg-linear-to-r ${getRoomTypeColor(group.room_type)}`}></div>
+              <div className={`h-2 bg-gradient-to-r ${getRoomTypeColor(group.room_type)}`}></div>
               
               <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
@@ -99,7 +99,7 @@ export default function StudyGroups() {
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2 mb-3">
                     <div
-                      className={`h-2 rounded-full bg-linear-to-r ${getRoomTypeColor(group.room_type)}`}
+                      className={`h-2 rounded-full bg-gradient-to-r ${getRoomTypeColor(group.room_type)}`}
                       style={{ width: `${(group.current_members / group.max_members) * 100}%` }}
                     ></div>
                   </div>
@@ -119,7 +119,7 @@ export default function StudyGroups() {
                   className={`w-full py-3 rounded-lg font-semibold transition flex items-center justify-center ${
                     group.current_members >= group.max_members
                       ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                      : `bg-linear-to-r ${getRoomTypeColor(group.room_type)} text-white hover:opacity-90`
+                      : `bg-gradient-to-r ${getRoomTypeColor(group.room_type)} text-white hover:opacity-90`
                   }`}
                 >
                   {group.current_members >= group.max_members ? (

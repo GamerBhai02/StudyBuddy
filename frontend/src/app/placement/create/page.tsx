@@ -117,10 +117,10 @@ export default function CreatePlacementProfile() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-green-50 to-teal-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="bg-linear-to-r from-green-600 to-teal-600 rounded-2xl p-8 text-white mb-8 shadow-xl">
+        <div className="bg-gradient-to-r from-green-600 to-teal-600 rounded-2xl p-8 text-white mb-8 shadow-xl">
           <div className="flex items-center mb-4">
             <Briefcase className="w-12 h-12 mr-4" />
             <div>
@@ -281,7 +281,7 @@ export default function CreatePlacementProfile() {
           </div>
 
           {/* Summary */}
-          <div className="bg-linear-to-r from-green-50 to-teal-50 rounded-lg p-6 border border-green-200">
+          <div className="bg-gradient-to-r from-green-50 to-teal-50 rounded-lg p-6 border border-green-200">
             <h3 className="font-semibold text-gray-900 mb-3">📋 Preparation Summary</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
               <div>
@@ -309,7 +309,7 @@ export default function CreatePlacementProfile() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-linear-to-r from-green-600 to-teal-600 text-white py-4 rounded-lg font-bold text-lg hover:from-green-700 hover:to-teal-700 transition disabled:opacity-50 flex items-center justify-center shadow-lg"
+            className="w-full bg-gradient-to-r from-green-600 to-teal-600 text-white py-4 rounded-lg font-bold text-lg hover:from-green-700 hover:to-teal-700 transition disabled:opacity-50 flex items-center justify-center shadow-lg"
           >
             {loading ? (
               'Creating Profile...'
