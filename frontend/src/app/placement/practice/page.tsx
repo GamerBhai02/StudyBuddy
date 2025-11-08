@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { 
   Code, Clock, CheckCircle, XCircle, TrendingUp, 
@@ -21,7 +21,7 @@ interface TopicAnalytics {
   };
 }
 
-export default function PlacementPractice() {
+function PlacementPracticeContent() {
   const searchParams = useSearchParams();
   const profileId = searchParams.get('profileId') || '1';
 
@@ -114,7 +114,7 @@ export default function PlacementPractice() {
       case 'easy': return 'text-green-600 bg-green-100';
       case 'medium': return 'text-yellow-600 bg-yellow-100';
       case 'hard': return 'text-red-600 bg-red-100';
-      default: return 'text-gray-600 bg-gray-100';
+      default: return '';
     }
   };
 
@@ -338,5 +338,12 @@ export default function PlacementPractice() {
         </div>
       </div>
     </div>
+  );
+}
+export default function PlacementPractice() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PlacementPracticeContent />
+    </Suspense>
   );
 }
