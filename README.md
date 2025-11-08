@@ -125,6 +125,55 @@ npm run dev
 
 The application will be available at `http://localhost:3000`
 
+## 🔥 Deploy on Replit (Easiest Method)
+
+Want to deploy instantly without any setup? Use Replit!
+
+### ⚡ One-Click Deployment
+
+1. **Fork on Replit**
+   - Visit [Replit](https://replit.com)
+   - Import this repository: `https://github.com/GamerBhai02/StudyBuddy`
+   - Click "Run" - that's it! Everything is configured automatically.
+
+2. **What Happens Automatically**
+   - ✅ All dependencies installed (Node.js, Python, PostgreSQL)
+   - ✅ Backend and Frontend servers start together
+   - ✅ Environment files created with templates
+   - ✅ Database initialized
+   - ✅ Both servers running on correct ports
+
+3. **Configure Your API Keys**
+   - Open `backend/.env` in Replit editor
+   - Add your API keys:
+     ```
+     MISTRAL_API_KEY=your-actual-key-here
+     GROQ_API_KEY=your-actual-key-here
+     GOOGLE_API_KEY=your-actual-key-here
+     ```
+   - Click "Stop" and then "Run" again
+
+4. **Access Your Application**
+   - Frontend: Click the "Open website" button in Replit
+   - Backend API: Available at your-repl-name.repl.co:8000
+   - API Docs: your-repl-name.repl.co:8000/docs
+
+### 🔧 Replit Configuration Files
+
+The repository includes:
+- `.replit` - Replit configuration
+- `replit.nix` - System dependencies
+- `start.sh` - Startup script that runs both servers
+
+### 💡 Benefits of Replit Deployment
+
+- ✅ No local setup required
+- ✅ Works on any device (even Chromebooks!)
+- ✅ Automatic HTTPS
+- ✅ Built-in code editor
+- ✅ Easy collaboration
+- ✅ Free tier available
+
 ## 📁 Project Structure
 
 ```

@@ -1,0 +1,22 @@
+run = "bash start.sh"
+entrypoint = "README.md"
+modules = ["nodejs-20", "python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["bash", "start.sh"]
+deploymentTarget = "cloudrun"
+
+[env]
+PATH = "/home/runner/$REPL_SLUG/.pythonlibs/bin:/home/runner/$REPL_SLUG/node_modules/.bin:$PATH"
+PYTHONPATH = "/home/runner/$REPL_SLUG/.pythonlibs/lib/python3.11/site-packages"
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[[ports]]
+localPort = 8000
+externalPort = 8000
