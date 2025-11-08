@@ -163,3 +163,32 @@ async def delete_placement_profile(
     db.commit()
     
     return {"message": "Profile deleted successfully"}
+
+from app.services.company_questions_service import CompanyQuestionsService
+
+company_questions_service = CompanyQuestionsService()
+
+@router.get("/company-questions/{company_name}")
+async def get_company_questions(
+    company_name: str,
+    role: str = "SDE"
+):
+    """
+    Get interview questions for a specific company
+    Uses curated data or AI fallback
+    """
+    try:
+        questions = company_questions_service.get_company_questions(company_name, role)
+        return questions
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/available-companies")
+async def get_available_companies():
+    """Get list of companies with curated question data"""
+    companies = company_questions_service.get_available_companies()
+    return {
+        "companies": companies,
+        "count": len(companies),
+        "note": "Other companies use AI-generated patterns"
+    }
