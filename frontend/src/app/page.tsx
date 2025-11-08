@@ -7,7 +7,7 @@ export default function HomePage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-pink-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Header */}
         <div className="text-center mb-12">
@@ -30,7 +30,7 @@ export default function HomePage() {
             className="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all p-8 text-left transform hover:scale-105 duration-300"
           >
             <div className="flex items-start justify-between mb-4">
-              <div className="w-16 h-16 bg-linear-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                 <GraduationCap className="w-8 h-8 text-white" />
               </div>
               <span className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full">
@@ -72,7 +72,7 @@ export default function HomePage() {
             className="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all p-8 text-left transform hover:scale-105 duration-300"
           >
             <div className="flex items-start justify-between mb-4">
-              <div className="w-16 h-16 bg-linear-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+              <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
                 <Briefcase className="w-8 h-8 text-white" />
               </div>
               <span className="px-3 py-1 bg-green-100 text-green-700 text-sm font-semibold rounded-full">

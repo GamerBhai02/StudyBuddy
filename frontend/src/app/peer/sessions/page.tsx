@@ -85,7 +85,7 @@ const DEMO_SESSIONS = [
 ];
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-orange-50 to-red-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50 py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <Code className="w-16 h-16 text-orange-600 mx-auto mb-4" />
@@ -145,7 +145,7 @@ const DEMO_SESSIONS = [
 
               {/* Actions */}
               <div className="flex gap-4">
-                <button className="flex-1 px-6 py-3 bg-linear-to-r from-orange-600 to-red-600 text-white rounded-lg font-semibold hover:from-orange-700 hover:to-red-700 transition">
+                <button className="flex-1 px-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-lg font-semibold hover:from-orange-700 hover:to-red-700 transition">
                   Submit Solution
                 </button>
                 <button 
@@ -166,7 +166,7 @@ const DEMO_SESSIONS = [
               <div className="grid grid-cols-2 gap-4">
                 {['Rahul', 'Priya', 'Amit', 'You'].map((name, idx) => (
                   <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                    <div className="w-10 h-10 bg-linear-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold">
+                    <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center text-white font-bold">
                       {name.charAt(0)}
                     </div>
                     <div>
@@ -215,7 +215,7 @@ const DEMO_SESSIONS = [
                   </div>
                   <button
                     onClick={() => joinSession(session.id)}
-                    className="px-6 py-3 bg-linear-to-r from-orange-600 to-red-600 text-white rounded-lg font-semibold hover:from-orange-700 hover:to-red-700 transition flex items-center"
+                    className="px-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded-lg font-semibold hover:from-orange-700 hover:to-red-700 transition flex items-center"
                   >
                     <Play className="w-5 h-5 mr-2" />
                     Join Session
@@ -225,7 +225,7 @@ const DEMO_SESSIONS = [
             ))}
 
             {/* Create Session */}
-            <div className="bg-linear-to-r from-orange-600 to-red-600 rounded-xl p-8 text-white text-center">
+            <div className="bg-gradient-to-r from-orange-600 to-red-600 rounded-xl p-8 text-white text-center">
               <h3 className="text-2xl font-bold mb-2">Start Your Own Session</h3>
               <p className="mb-6 text-orange-100">Invite your group to solve together</p>
               <button className="px-8 py-3 bg-white text-orange-600 rounded-lg font-bold hover:bg-gray-100 transition">

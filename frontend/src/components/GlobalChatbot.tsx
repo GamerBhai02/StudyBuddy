@@ -212,7 +212,7 @@ export default function GlobalChatbot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 w-16 h-16 bg-linear-to-r from-purple-600 to-pink-600 rounded-full shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 flex items-center justify-center z-50 group animate-bounce hover:animate-none"
+          className="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full shadow-2xl hover:shadow-purple-500/50 transition-all duration-300 flex items-center justify-center z-50 group animate-bounce hover:animate-none"
         >
           <MessageCircle className="w-8 h-8 text-white group-hover:scale-110 transition-transform" />
           <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full animate-pulse"></span>
@@ -223,7 +223,7 @@ export default function GlobalChatbot() {
       {isOpen && (
         <div className={`fixed ${isMinimized ? 'bottom-6 right-6' : 'bottom-6 right-6 md:bottom-6 md:right-6'} w-full md:w-96 ${isMinimized ? 'h-16' : 'h-[600px]'} bg-white rounded-2xl shadow-2xl z-50 flex flex-col overflow-hidden transition-all duration-300`}>
           {/* Header */}
-          <div className="bg-linear-to-r from-purple-600 to-pink-600 p-4 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                 <MessageCircle className="w-6 h-6 text-white" />
@@ -329,7 +329,7 @@ export default function GlobalChatbot() {
               )}
 
               {/* Messages Area */}
-              <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-linear-to-b from-gray-50 to-white">
+              <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-b from-gray-50 to-white">
                 {messages.map((message) => (
                   <div
                     key={message.id}
@@ -339,7 +339,7 @@ export default function GlobalChatbot() {
                       <div
                         className={`rounded-2xl p-3 ${
                           message.sender === 'user'
-                            ? 'bg-linear-to-r from-purple-600 to-pink-600 text-white'
+                            ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
                             : 'bg-gray-100 text-gray-900'
                         }`}
                       >
@@ -426,7 +426,7 @@ export default function GlobalChatbot() {
                   <button
                     onClick={handleSend}
                     disabled={!inputText.trim()}
-                    className="p-3 bg-linear-to-r from-purple-600 to-pink-600 text-white rounded-full hover:from-purple-700 hover:to-pink-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full hover:from-purple-700 hover:to-pink-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
                     title="Send message"
                   >
                     <Send className="w-5 h-5" />

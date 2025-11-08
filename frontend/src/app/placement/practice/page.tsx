@@ -119,10 +119,10 @@ export default function PlacementPractice() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-green-50 to-teal-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="bg-linear-to-r from-green-600 to-teal-600 rounded-2xl p-8 text-white mb-8">
+        <div className="bg-gradient-to-r from-green-600 to-teal-600 rounded-2xl p-8 text-white mb-8">
           <h1 className="text-3xl font-bold mb-2 flex items-center">
             <Code className="w-8 h-8 mr-3" />
             DSA Practice Workspace
@@ -153,7 +153,7 @@ export default function PlacementPractice() {
             </div>
             <div className="w-full bg-gray-200 rounded-full h-3">
               <div
-                className="bg-linear-to-r from-green-500 to-teal-500 h-3 rounded-full transition-all"
+                className="bg-gradient-to-r from-green-500 to-teal-500 h-3 rounded-full transition-all"
                 style={{ width: `${dailyProgress.progress_percentage}%` }}
               />
             </div>
@@ -263,7 +263,7 @@ export default function PlacementPractice() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full px-6 py-3 bg-linear-to-r from-green-600 to-teal-600 text-white rounded-lg font-bold hover:from-green-700 hover:to-teal-700 disabled:opacity-50 flex items-center justify-center"
+                className="w-full px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-lg font-bold hover:from-green-700 hover:to-teal-700 disabled:opacity-50 flex items-center justify-center"
               >
                 <Save className="w-5 h-5 mr-2" />
                 {submitting ? 'Recording...' : 'Record Practice'}

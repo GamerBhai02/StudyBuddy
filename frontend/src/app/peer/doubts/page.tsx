@@ -34,7 +34,7 @@ export default function DoubtThreads() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-green-50 to-teal-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -44,7 +44,7 @@ export default function DoubtThreads() {
           </div>
           <button
             onClick={() => setShowCreateModal(true)}
-            className="px-6 py-3 bg-linear-to-r from-green-600 to-teal-600 text-white rounded-lg font-semibold hover:from-green-700 hover:to-teal-700 transition flex items-center shadow-lg"
+            className="px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-lg font-semibold hover:from-green-700 hover:to-teal-700 transition flex items-center shadow-lg"
           >
             <Plus className="w-5 h-5 mr-2" />
             Ask Doubt

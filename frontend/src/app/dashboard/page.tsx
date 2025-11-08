@@ -79,7 +79,7 @@ export default function DashboardPage() {
           </p>
           <button
             onClick={() => router.push('/peer')}
-            className="px-6 py-3 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition flex items-center shadow-lg"
+            className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition flex items-center shadow-lg"
           >
             <Users className="w-5 h-5 mr-2" />
             Peer Learning
@@ -193,7 +193,7 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <button
             onClick={() => router.push(`/practice/select?planId=${planId}`)}
-            className="bg-linear-to-r from-blue-500 to-blue-600 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
+            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
           >
             <div className="flex items-center mb-3">
               <Target className="w-8 h-8 mr-3" />
@@ -204,7 +204,7 @@ export default function DashboardPage() {
 
           <button
             onClick={() => router.push(`/practice/weak-topics?planId=${planId}`)}
-            className="bg-linear-to-r from-orange-500 to-red-500 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
+            className="bg-gradient-to-r from-orange-500 to-red-500 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
           >
             <div className="flex items-center mb-3">
               <TrendingUp className="w-8 h-8 mr-3" />
@@ -217,7 +217,7 @@ export default function DashboardPage() {
 
           <button
             onClick={() => router.push(`/exam-day?planId=${planId}`)}
-            className="bg-linear-to-r from-red-500 to-orange-500 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
+            className="bg-gradient-to-r from-red-500 to-orange-500 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
           >
             <div className="flex items-center mb-3">
               <Zap className="w-8 h-8 mr-3" />
@@ -229,7 +229,7 @@ export default function DashboardPage() {
 
           <button
             onClick={() => router.push(`/practice/reviews?planId=${planId}`)}
-            className="bg-linear-to-r from-purple-500 to-pink-500 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
+            className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 rounded-xl shadow-lg hover:shadow-xl transition transform hover:scale-105 text-left"
           >
             <div className="flex items-center mb-3">
               <Brain className="w-8 h-8 mr-3" />

@@ -47,13 +47,13 @@ export default function PlacementProfiles() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-green-50 to-teal-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Your Placement Profiles</h1>
           <button
             onClick={() => router.push('/placement/create')}
-            className="px-6 py-3 bg-linear-to-r from-green-600 to-teal-600 text-white rounded-lg font-bold hover:from-green-700 hover:to-teal-700 transition inline-flex items-center"
+            className="px-6 py-3 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-lg font-bold hover:from-green-700 hover:to-teal-700 transition inline-flex items-center"
           >
             <Plus className="w-5 h-5 mr-2" />
             New Profile

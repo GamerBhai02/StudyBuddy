@@ -58,7 +58,7 @@ export default function RevisionChallenges() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-yellow-50 to-orange-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <Trophy className="w-16 h-16 text-yellow-600 mx-auto mb-4" />
@@ -96,7 +96,7 @@ export default function RevisionChallenges() {
                       </span>
                     </div>
                   </div>
-                  <button className="px-6 py-3 bg-linear-to-r from-yellow-500 to-orange-500 text-white rounded-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition whitespace-nowrap">
+                  <button className="px-6 py-3 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg font-semibold hover:from-yellow-600 hover:to-orange-600 transition whitespace-nowrap">
                     {challenge.status === 'active' ? 'Join Now' : 'Start Challenge'}
                   </button>
                 </div>
@@ -104,7 +104,7 @@ export default function RevisionChallenges() {
             ))}
 
             {/* Create Challenge */}
-            <div className="bg-linear-to-r from-yellow-500 to-orange-500 rounded-xl p-8 text-white">
+            <div className="bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl p-8 text-white">
               <h3 className="text-2xl font-bold mb-2">Create Custom Challenge</h3>
               <p className="mb-6 text-yellow-100">Set your own questions and time limit</p>
               <button className="px-8 py-3 bg-white text-orange-600 rounded-lg font-bold hover:bg-gray-100 transition">
@@ -126,7 +126,7 @@ export default function RevisionChallenges() {
                     key={entry.rank}
                     className={`flex items-center gap-3 p-3 rounded-lg transition ${
                       entry.name === 'You' 
-                        ? 'bg-linear-to-r from-yellow-50 to-orange-50 border-2 border-yellow-300' 
+                        ? 'bg-gradient-to-r from-yellow-50 to-orange-50 border-2 border-yellow-300' 
                         : 'bg-gray-50'
                     }`}
                   >

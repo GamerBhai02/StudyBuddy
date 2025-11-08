@@ -46,7 +46,7 @@ export default function WeaknessAnalysis() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-red-50 to-pink-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 to-pink-50 py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <TrendingDown className="w-16 h-16 text-red-600 mx-auto mb-4" />
@@ -55,7 +55,7 @@ export default function WeaknessAnalysis() {
         </div>
 
         {/* Summary Card */}
-        <div className="bg-linear-to-r from-red-600 to-pink-600 rounded-2xl p-8 text-white mb-8 shadow-xl">
+        <div className="bg-gradient-to-r from-red-600 to-pink-600 rounded-2xl p-8 text-white mb-8 shadow-xl">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-2xl font-bold mb-2">Your Group Struggles Most With:</h2>
@@ -93,7 +93,7 @@ export default function WeaknessAnalysis() {
                     </div>
                     <div className="w-full bg-gray-200 rounded-full h-3">
                       <div
-                        className={`h-3 rounded-full bg-linear-to-r ${getLevelColor(weakness.level)}`}
+                        className={`h-3 rounded-full bg-gradient-to-r ${getLevelColor(weakness.level)}`}
                         style={{ width: `${weakness.avg_score}%` }}
                       ></div>
                     </div>
@@ -111,7 +111,7 @@ export default function WeaknessAnalysis() {
                   </div>
                 </div>
 
-                <button className={`px-6 py-3 bg-linear-to-r ${getLevelColor(weakness.level)} text-white rounded-lg font-semibold hover:opacity-90 transition whitespace-nowrap`}>
+                <button className={`px-6 py-3 bg-gradient-to-r ${getLevelColor(weakness.level)} text-white rounded-lg font-semibold hover:opacity-90 transition whitespace-nowrap`}>
                   Practice Now
                 </button>
               </div>
@@ -135,7 +135,7 @@ export default function WeaknessAnalysis() {
             <BarChart3 className="w-6 h-6 mr-2 text-red-600" />
             Group Progress Over Time
           </h3>
-          <div className="h-64 bg-linear-to-t from-gray-50 to-white rounded-lg flex items-center justify-center">
+          <div className="h-64 bg-gradient-to-t from-gray-50 to-white rounded-lg flex items-center justify-center">
             <p className="text-gray-500">📈 Graph showing improvement trends would appear here</p>
           </div>
         </div>

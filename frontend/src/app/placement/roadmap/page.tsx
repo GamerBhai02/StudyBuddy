@@ -129,7 +129,7 @@ export default function PlacementRoadmap() {
 
   if (!roadmap) {
     return (
-      <div className="min-h-screen bg-linear-to-br from-green-50 to-teal-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-xl p-12 max-w-md text-center">
           <Calendar className="w-16 h-16 text-green-600 mx-auto mb-4" />
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
@@ -141,7 +141,7 @@ export default function PlacementRoadmap() {
           <button
             onClick={generateRoadmap}
             disabled={generating}
-            className="px-8 py-4 bg-linear-to-r from-green-600 to-teal-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-teal-700 disabled:opacity-50"
+            className="px-8 py-4 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl font-bold hover:from-green-700 hover:to-teal-700 disabled:opacity-50"
           >
             {generating ? 'Generating...' : 'Generate Roadmap'}
           </button>
@@ -151,10 +151,10 @@ export default function PlacementRoadmap() {
   }
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-green-50 to-teal-50 py-8 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 py-8 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header with Stats */}
-        <div className="bg-linear-to-r from-green-600 to-teal-600 rounded-2xl p-8 text-white mb-8 shadow-xl">
+        <div className="bg-gradient-to-r from-green-600 to-teal-600 rounded-2xl p-8 text-white mb-8 shadow-xl">
           <h1 className="text-3xl font-bold mb-6 flex items-center">
             <Calendar className="w-8 h-8 mr-3" />
             Your Placement Roadmap
@@ -191,7 +191,7 @@ export default function PlacementRoadmap() {
                 {/* Day Header */}
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center">
-                    <div className="w-12 h-12 bg-linear-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold mr-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white font-bold mr-4">
                       {day.day}
                     </div>
                     <div>
@@ -221,7 +221,7 @@ export default function PlacementRoadmap() {
                     {/* YouTube Button */}
                     <button
                       onClick={() => setYoutubeModal({ isOpen: true, topic: day.topic })}
-                      className="px-4 py-2 bg-linear-to-r from-red-500 to-pink-500 text-white rounded-lg font-semibold hover:from-red-600 hover:to-pink-600 transition flex items-center text-sm shadow-lg"
+                      className="px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white rounded-lg font-semibold hover:from-red-600 hover:to-pink-600 transition flex items-center text-sm shadow-lg"
                     >
                       <Play className="w-4 h-4 mr-2" />
                       Learn on YouTube
@@ -252,7 +252,7 @@ export default function PlacementRoadmap() {
               {/* Progress Indicator */}
               <div className="h-1 bg-gray-200">
                 <div
-                  className="h-full bg-linear-to-r from-green-500 to-teal-500 transition-all"
+                  className="h-full bg-gradient-to-r from-green-500 to-teal-500 transition-all"
                   style={{ width: `${((day.day) / roadmap.statistics.total_days) * 100}%` }}
                 />
               </div>

@@ -48,7 +48,7 @@ export default function StudyPartners() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <Users className="w-16 h-16 text-blue-600 mx-auto mb-4" />
@@ -69,7 +69,7 @@ export default function StudyPartners() {
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-6 flex-1">
                     {/* Avatar */}
-                    <div className="w-20 h-20 bg-linear-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                    <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
                       {partner.name.charAt(0)}
                     </div>
 
@@ -125,7 +125,7 @@ export default function StudyPartners() {
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleConnect(partner.id)}
-                      className="px-6 py-3 bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition flex items-center"
+                      className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition flex items-center"
                     >
                       <Check className="w-5 h-5 mr-2" />
                       Connect
