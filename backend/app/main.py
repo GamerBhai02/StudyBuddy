@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from app.config.database import engine, Base
+from app.config.database import init_database
 from app.routes import upload, study_plan, lessons, test_gemini, practice  # Add practice
 from app.models import models
 from app.routes import upload, study_plan, lessons, test_gemini, practice, srs
@@ -18,15 +18,30 @@ from app.routes import (
     youtube, peer  # Add peer
 )
 import traceback
+import logging
 
-# Create database tables
-Base.metadata.create_all(bind=engine)
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="Smart Exam Prep API",
     description="AI-powered exam preparation - Phase 3: Chatbot",
     version="3.0.0"
 )
+
+@app.on_event("startup")
+async def startup_event():
+    """Initialize database on application startup"""
+    logger.info("Starting application...")
+    success = init_database()
+    if success:
+        logger.info("✓ Application started successfully with database initialized")
+    else:
+        logger.warning("⚠ Application started but database initialization had issues")
 
 # Exception handler
 @app.exception_handler(Exception)
@@ -97,7 +112,7 @@ async def health_check():
 @app.get("/debug/db-status")
 async def check_database():
     """Check database connection and tables"""
-    from app.config.database import SessionLocal
+    from app.config.database import SessionLocal, engine
     from sqlalchemy import inspect
     
     try:
@@ -111,8 +126,14 @@ async def check_database():
         
         db.close()
         
+        # Determine database type
+        db_url = str(engine.url)
+        db_type = "SQLite" if "sqlite" in db_url else "PostgreSQL" if "postgresql" in db_url else "Unknown"
+        
         return {
             "status": "connected",
+            "database_type": db_type,
+            "database_url": db_url.split('@')[-1] if '@' in db_url else db_url,  # Hide credentials
             "tables": tables,
             "user_count": user_count,
             "plan_count": plan_count

@@ -1,14 +1,13 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
-from app.config.database import get_db, Base, engine
+from app.config.database import get_db
 from app.models.placement_models import PlacementUser, PlacementProfile, PlacementPlan
 from app.schemas.placement_schemas import PlacementProfileCreate, PlacementProfileResponse
 from datetime import date
 
 router = APIRouter(prefix="/api/placement", tags=["placement"])
 
-# Initialize placement tables
-Base.metadata.create_all(bind=engine)
+# Database tables are initialized in main.py on application startup
 
 @router.post("/profile", response_model=PlacementProfileResponse)
 async def create_placement_profile(

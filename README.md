@@ -45,7 +45,7 @@ An AI-powered comprehensive study platform that helps students prepare for both 
 
 ### Backend
 - **Framework**: FastAPI 0.104
-- **Database**: PostgreSQL with SQLAlchemy ORM
+- **Database**: SQLite (default) / PostgreSQL with SQLAlchemy ORM
 - **Authentication**: JWT with python-jose
 - **File Processing**: PyPDF2 for document extraction
 - **AI/LLM**: Multi-provider support (Mistral, Groq, Google GenAI)
@@ -56,9 +56,11 @@ An AI-powered comprehensive study platform that helps students prepare for both 
 Before you begin, ensure you have the following installed:
 - Node.js (v18 or higher)
 - Python (v3.9 or higher)
-- PostgreSQL (v14 or higher)
 - npm or yarn package manager
 - pip (Python package manager)
+- PostgreSQL (v14 or higher) - **Optional**, only needed for production deployments
+
+**Note**: PostgreSQL is optional. The application works with SQLite by default, which requires no additional installation.
 
 ## 🚀 Quick Start
 
@@ -88,16 +90,19 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Set up environment variables
-# Create a .env file in the backend directory with:
-# DATABASE_URL=postgresql://username:password@localhost:5432/studybuddy
-# SECRET_KEY=your-secret-key-here
-# Add your AI API keys (Mistral, Groq, Google GenAI)
+# Copy the template and configure your settings:
+cp .env.template .env
+
+# Edit .env file with your preferred text editor
+# For quick start with SQLite (default):
+#   DATABASE_URL=sqlite:///./exam_prep_db.db
+#   Add your AI API keys (at minimum, GEMINI_API_KEY)
+
+# For PostgreSQL (optional, production):
+#   DATABASE_URL=postgresql://username:password@localhost:5432/studybuddy
 
 # Initialize the database
 python init_db.py
-
-# Run database migrations (if needed)
-python migrate.py
 
 # Start the backend server
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
@@ -256,6 +261,47 @@ The platform includes a global AI chatbot with:
 - Support for multiple voice profiles
 - Quick question suggestions
 
+## 💾 Database Configuration
+
+The application supports two database options:
+
+### SQLite (Default - Recommended for Development)
+- ✅ **No installation required** - Comes with Python
+- ✅ **Zero configuration** - Works out of the box
+- ✅ **Perfect for Replit** - File-based, no server needed
+- ✅ **Local development** - Easy to set up and reset
+- ✅ **Automatic fallback** - Used if PostgreSQL connection fails
+
+```bash
+DATABASE_URL=sqlite:///./exam_prep_db.db
+```
+
+### PostgreSQL (Optional - Recommended for Production)
+- ✅ **Better performance** - Handles concurrent users
+- ✅ **Production ready** - Advanced features and reliability
+- ✅ **Scalable** - Better for large deployments
+
+```bash
+DATABASE_URL=postgresql://username:password@localhost:5432/studybuddy
+```
+
+**Automatic Fallback**: If PostgreSQL is configured but connection fails, the application automatically falls back to SQLite to ensure startup success.
+
+### Troubleshooting Database Issues
+
+**Issue**: `Connection refused` or `could not connect to server`
+- **Solution**: If you see these errors with PostgreSQL, the app will automatically fall back to SQLite. You can also explicitly switch to SQLite in your `.env` file.
+
+**Issue**: Database tables not created
+- **Solution**: Run `python init_db.py` from the backend directory
+
+**Issue**: Want to switch databases
+- **Solution**: Update `DATABASE_URL` in `.env` and restart the server. All data will be fresh in the new database.
+
+**Issue**: Want to reset database
+- **SQLite**: Delete the `.db` file and run `python init_db.py`
+- **PostgreSQL**: Drop and recreate the database, then run `python init_db.py`
+
 ## 🔐 Environment Variables
 
 ### Frontend (.env.local)
@@ -265,8 +311,12 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 
 ### Backend (.env)
 ```
-DATABASE_URL=postgresql://username:password@localhost:5432/studybuddy
+# Database (choose one)
+DATABASE_URL=sqlite:///./exam_prep_db.db  # For development
+# DATABASE_URL=postgresql://username:password@localhost:5432/studybuddy  # For production
+
 SECRET_KEY=your-secret-key-here
+GEMINI_API_KEY=your-gemini-api-key
 MISTRAL_API_KEY=your-mistral-api-key
 GROQ_API_KEY=your-groq-api-key
 GOOGLE_API_KEY=your-google-api-key
