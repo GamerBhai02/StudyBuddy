@@ -6,8 +6,7 @@ from app.routes import upload, study_plan, lessons, test_gemini, practice  # Add
 from app.models import models
 from app.routes import upload, study_plan, lessons, test_gemini, practice, srs
 from app.routes import upload, study_plan, lessons, test_gemini, practice, srs, exam_day
-
-# ... existing code ...
+from app.routes import upload, study_plan, lessons, test_gemini, practice, srs, exam_day, chatbot
 import traceback
 
 # Create database tables
@@ -15,8 +14,8 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Smart Exam Prep API",
-    description="AI-powered exam preparation using Gemini 2.5 Pro",
-    version="1.0.0"
+    description="AI-powered exam preparation - Phase 3: Chatbot",
+    version="3.0.0"
 )
 
 # Exception handler
@@ -58,22 +57,26 @@ app.include_router(test_gemini.router)
 app.include_router(practice.router)
 app.include_router(srs.router)
 app.include_router(exam_day.router)
+app.include_router(chatbot.router)  # Phase 3
 
 @app.get("/")
 async def root():
     return {
-        "message": "Smart Exam Prep API - Phase 2",
-        "version": "2.0.0",
-        "features": ["Questions", "Practice", "Evaluation"]
+        "message": "Smart Exam Prep API - Phase 3: AI Chatbot",
+        "version": "3.0.0",
+        "features": [
+            "Phase 1: Onboarding & Study Plan",
+            "Phase 2: Practice & Questions",
+            "Phase 3: AI Chatbot with Voice"
+        ]
     }
-
 
 @app.get("/health")
 async def health_check():
     return {
         "status": "healthy",
-        "ai_provider": "Google Gemini 2.5 Pro",
-        "database": "connected"
+        "phase": "3",
+        "features": ["chatbot", "practice", "exam-day"]
     }
 
 @app.get("/debug/db-status")
