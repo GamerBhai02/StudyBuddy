@@ -9,6 +9,7 @@ passlib[bcrypt]==1.7.4
 python-dotenv==1.0.0
 alembic==1.12.1
 email-validator>=2.0.0
+gunicorn==21.2.0
 
 # Phase 3: Multi-Provider LLM
 mistralai>=1.0.0

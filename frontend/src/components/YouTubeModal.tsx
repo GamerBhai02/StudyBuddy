@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { X, Play, Clock, Eye, Star, ExternalLink, Youtube } from 'lucide-react';
+import api from '@/lib/api';
 
 interface Video {
   title: string;
@@ -34,11 +35,10 @@ export default function YouTubeModal({ topic, isOpen, onClose }: YouTubeModalPro
   const loadVideos = async () => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/youtube/recommend/${encodeURIComponent(topic)}?max_results=3`
+      const response = await api.get(
+        `/api/youtube/recommend/${encodeURIComponent(topic)}?max_results=3`
       );
-      const data = await response.json();
-      setVideos(data.videos || []);
+      setVideos(response.data.videos || []);
     } catch (error) {
       console.error('Failed to load videos:', error);
       setVideos([]);

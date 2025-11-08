@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { UsersRound, Users, Target, ArrowRight, Check } from 'lucide-react';
+import api from '@/lib/api';
 
 interface Group {
   id: number;
@@ -22,9 +23,8 @@ export default function StudyGroups() {
 
   const loadGroups = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/peer/groups');
-      const data = await response.json();
-      setGroups(data.groups);
+      const response = await api.get('/api/peer/groups');
+      setGroups(response.data.groups);
     } catch (error) {
       console.error('Failed to load groups:', error);
     }
@@ -32,11 +32,8 @@ export default function StudyGroups() {
 
   const handleJoinGroup = async (groupId: number) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/peer/groups/${groupId}/join`, {
-        method: 'POST'
-      });
-      const data = await response.json();
-      alert(data.message);
+      const response = await api.post(`/api/peer/groups/${groupId}/join`);
+      alert(response.data.message);
       loadGroups();
     } catch (error: any) {
       alert(error.message || 'Failed to join group');

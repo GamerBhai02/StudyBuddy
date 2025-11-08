@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Users, Clock, Target, Star, Check, X } from 'lucide-react';
+import api from '@/lib/api';
 
 interface Partner {
   id: number;
@@ -25,9 +26,8 @@ export default function StudyPartners() {
 
   const loadPartners = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/peer/find-partners');
-      const data = await response.json();
-      setPartners(data.matches);
+      const response = await api.get('/api/peer/find-partners');
+      setPartners(response.data.matches);
     } catch (error) {
       console.error('Failed to load partners:', error);
     } finally {
@@ -37,11 +37,8 @@ export default function StudyPartners() {
 
   const handleConnect = async (partnerId: number) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/peer/partner/connect/${partnerId}`, {
-        method: 'POST'
-      });
-      const data = await response.json();
-      alert(data.message);
+      const response = await api.post(`/api/peer/partner/connect/${partnerId}`);
+      alert(response.data.message);
     } catch (error) {
       console.error('Failed to connect:', error);
     }
