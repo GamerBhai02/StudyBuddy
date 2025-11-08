@@ -68,4 +68,7 @@ out/
 htmlcov/
 
 # Backend uploads
-backend/uploads/
+backend/uploads/*
+!backend/uploads/.gitkeep
+!backend/uploads/*/
+!backend/uploads/*/.gitkeep
