@@ -6,6 +6,7 @@ import {
   Code, Clock, CheckCircle, XCircle, TrendingUp, 
   Target, Calendar, BarChart3, Play, Save
 } from 'lucide-react';
+import api from '@/lib/api';
 
 interface TopicAnalytics {
   topic: string;
@@ -45,18 +46,16 @@ function PlacementPracticeContent() {
   const loadData = async () => {
     try {
       // Load analytics
-      const analyticsRes = await fetch(
-        `http://localhost:8000/api/placement/practice/analytics/${profileId}`
+      const analyticsRes = await api.get(
+        `/api/placement/practice/analytics/${profileId}`
       );
-      const analyticsData = await analyticsRes.json();
-      setAnalytics(analyticsData.topics);
+      setAnalytics(analyticsRes.data.topics);
 
       // Load daily progress
-      const dailyRes = await fetch(
-        `http://localhost:8000/api/placement/practice/daily/${profileId}`
+      const dailyRes = await api.get(
+        `/api/placement/practice/daily/${profileId}`
       );
-      const dailyData = await dailyRes.json();
-      setDailyProgress(dailyData);
+      setDailyProgress(dailyRes.data);
     } catch (error) {
       console.error('Failed to load data:', error);
     }
@@ -73,25 +72,20 @@ function PlacementPracticeContent() {
     setSubmitting(true);
 
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/placement/practice/record?profile_id=${profileId}`,
+      const response = await api.post(
+        `/api/placement/practice/record?profile_id=${profileId}`,
         {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            topic,
-            problem_name: problemName,
-            difficulty,
-            solved,
-            time_spent_minutes: timeSpent,
-            code: code || null,
-            notes: notes || null
-          })
+          topic,
+          problem_name: problemName,
+          difficulty,
+          solved,
+          time_spent_minutes: timeSpent,
+          code: code || null,
+          notes: notes || null
         }
       );
 
-      if (response.ok) {
-        alert('Practice recorded successfully!');
+      alert('Practice recorded successfully!');
         // Reset form
         setProblemName('');
         setCode('');
