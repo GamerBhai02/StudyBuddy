@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Code, Clock, Users, Play, Calendar, Trophy, Timer } from 'lucide-react';
+import api from '@/lib/api';
 
 interface Session {
   id: number;
@@ -47,16 +48,12 @@ const [error, setError] = useState(false);
 
 const loadSessions = async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/peer/sessions');
-    if (response.ok) {
-      const data = await response.json();
-      setSessions(data.sessions || []);
-    } else {
-      setError(true);
-      setSessions(DEMO_SESSIONS); // Use hardcoded demo data
-    }
+    const response = await api.get('/api/peer/sessions');
+    setSessions(response.data.sessions || []);
   } catch (error) {
     console.error('Failed to load sessions:', error);
+    setError(true);
+    setSessions(DEMO_SESSIONS); // Use hardcoded demo data
     setError(true);
     setSessions(DEMO_SESSIONS);
   } finally {

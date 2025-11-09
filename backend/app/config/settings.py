@@ -7,6 +7,10 @@ class Settings(BaseSettings):
     SECRET_KEY: str
     ALGORITHM: str = "HS256"
     
+    # Deployment configuration
+    PORT: int = 10000
+    CORS_ORIGINS: str = "http://localhost:3000"
+    FRONTEND_URL: str = "http://localhost:3000"
     
     MISTRAL_API_KEY: str | None = None
     GROQ_API_KEY: str | None = None

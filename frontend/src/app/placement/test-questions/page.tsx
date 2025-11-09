@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Search } from 'lucide-react';
+import api from '@/lib/api';
 
 export default function TestCompanyQuestions() {
   const [company, setCompany] = useState('Amazon');
@@ -12,11 +13,10 @@ export default function TestCompanyQuestions() {
   const handleSearch = async () => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/placement/company-questions/${company}?role=${role}`
+      const response = await api.get(
+        `/api/placement/company-questions/${company}?role=${role}`
       );
-      const data = await response.json();
-      setResult(data);
+      setResult(response.data);
     } catch (error) {
       console.error('Error:', error);
     } finally {

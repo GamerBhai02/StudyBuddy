@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Trophy, Clock, Users, Zap, Medal, Crown } from 'lucide-react';
+import api from '@/lib/api';
 
 interface Challenge {
   id: number;
@@ -30,9 +31,8 @@ export default function RevisionChallenges() {
 
   const loadChallenges = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/peer/challenges');
-      const data = await response.json();
-      setChallenges(data.challenges);
+      const response = await api.get('/api/peer/challenges');
+      setChallenges(response.data.challenges);
     } catch (error) {
       console.error('Failed to load challenges:', error);
     }
@@ -40,9 +40,8 @@ export default function RevisionChallenges() {
 
   const loadLeaderboard = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/peer/challenges/1/leaderboard');
-      const data = await response.json();
-      setLeaderboard(data.leaderboard);
+      const response = await api.get('/api/peer/challenges/1/leaderboard');
+      setLeaderboard(response.data.leaderboard);
     } catch (error) {
       console.error('Failed to load leaderboard:', error);
     }

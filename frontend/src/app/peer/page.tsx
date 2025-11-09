@@ -6,6 +6,7 @@ import {
   Users, MessageCircle, UsersRound, Code, Trophy, 
   TrendingDown, ArrowRight, Zap, Target, Calendar
 } from 'lucide-react';
+import api from '@/lib/api';
 
 export default function PeerLearningDashboard() {
   const router = useRouter();
@@ -19,15 +20,13 @@ export default function PeerLearningDashboard() {
 
   const loadStats = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/peer/stats');
-      if (response.ok) {
-        const data = await response.json();
-        setStats(data);
-      } else {
-        setError(true);
-        // Use default stats if API fails
-        setStats({
-          active_partners: 0,
+      const response = await api.get('/api/peer/stats');
+      setStats(response.data);
+    } catch (error) {
+      setError(true);
+      // Use default stats if API fails
+      setStats({
+        active_partners: 0,
           doubts_resolved: 0,
           groups_joined: 0,
           challenges_completed: 0,

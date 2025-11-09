@@ -130,6 +130,64 @@ npm run dev
 
 The application will be available at `http://localhost:3000`
 
+## 🚀 Production Deployment
+
+For production deployment with separate frontend and backend hosting, see our comprehensive **[DEPLOYMENT.md](./DEPLOYMENT.md)** guide.
+
+### Quick Overview
+
+**Architecture**: Separate deployment of frontend (Vercel) and backend (Render)
+
+```
+┌─────────────────┐         ┌──────────────────┐
+│  Vercel (Free)  │         │  Render (Free)   │
+│  Next.js        │ ◄─────► │  FastAPI         │
+│  Frontend       │  HTTPS  │  Backend + DB    │
+└─────────────────┘         └──────────────────┘
+```
+
+**Key Features**:
+- ✅ Free hosting for both frontend and backend
+- ✅ Automatic HTTPS and SSL certificates
+- ✅ Continuous deployment from GitHub
+- ✅ Environment variable management
+- ✅ PostgreSQL database support
+
+**Deploy in 3 steps**:
+1. **Deploy Backend** → Render (10 minutes)
+2. **Deploy Frontend** → Vercel (5 minutes)
+3. **Connect & Configure** → Update CORS settings
+
+👉 **[Read Full Deployment Guide](./DEPLOYMENT.md)**
+
+### 📋 Environment Variables
+
+#### Backend (.env)
+```bash
+DATABASE_URL=sqlite:///./exam_prep_db.db  # or PostgreSQL URL
+PORT=10000  # Render default
+CORS_ORIGINS=https://your-app.vercel.app,http://localhost:3000
+FRONTEND_URL=https://your-app.vercel.app
+SECRET_KEY=your-secret-key
+GEMINI_API_KEY=your-gemini-key
+MISTRAL_API_KEY=your-mistral-key  # Optional
+GROQ_API_KEY=your-groq-key  # Optional
+```
+
+#### Frontend (.env.local)
+```bash
+NEXT_PUBLIC_API_URL=https://your-backend.onrender.com
+```
+
+### ⚠️ Free Tier Limitations
+
+**Render Free Tier**:
+- Services spin down after 15 minutes of inactivity
+- First request after sleep takes 30-60 seconds (cold start)
+- 750 hours/month (enough for 24/7 operation)
+
+**Workaround**: Use [UptimeRobot](https://uptimerobot.com/) to ping your backend every 10 minutes to prevent cold starts.
+
 ## 🔥 Deploy on Replit (Easiest Method)
 
 Want to deploy instantly without any setup? Use Replit!
@@ -305,17 +363,30 @@ DATABASE_URL=postgresql://username:password@localhost:5432/studybuddy
 ## 🔐 Environment Variables
 
 ### Frontend (.env.local)
-```
+```bash
+# Local development
 NEXT_PUBLIC_API_URL=http://localhost:8000
+
+# Production (Vercel)
+# NEXT_PUBLIC_API_URL=https://your-backend.onrender.com
 ```
 
 ### Backend (.env)
-```
+```bash
 # Database (choose one)
 DATABASE_URL=sqlite:///./exam_prep_db.db  # For development
 # DATABASE_URL=postgresql://username:password@localhost:5432/studybuddy  # For production
 
+# Deployment Configuration
+PORT=8000  # Use 10000 for Render
+CORS_ORIGINS=http://localhost:3000  # Add production URL: https://your-app.vercel.app
+FRONTEND_URL=http://localhost:3000  # Update for production
+
+# Security
 SECRET_KEY=your-secret-key-here
+ALGORITHM=HS256
+
+# AI/LLM API Keys (required)
 GEMINI_API_KEY=your-gemini-api-key
 MISTRAL_API_KEY=your-mistral-api-key
 GROQ_API_KEY=your-groq-api-key

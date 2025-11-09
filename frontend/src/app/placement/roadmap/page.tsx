@@ -7,6 +7,7 @@ import {
   Calendar, Code, CheckCircle, Clock, Target, 
   TrendingUp, Users, Layers, AlertCircle, Zap, Play
 } from 'lucide-react';
+import api from '@/lib/api';
 
 interface DayPlan {
   day: number;
@@ -58,11 +59,8 @@ export default function PlacementRoadmap() {
   const loadRoadmap = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/api/placement/roadmap/${profileId}`);
-      if (response.ok) {
-        const data = await response.json();
-        setRoadmap({ roadmap: data.roadmap, statistics: data as any, daily_dsa_count: 0 });
-      }
+      const response = await api.get(`/api/placement/roadmap/${profileId}`);
+      setRoadmap({ roadmap: response.data.roadmap, statistics: response.data as any, daily_dsa_count: 0 });
     } catch (error) {
       console.log('No existing roadmap, need to generate');
     } finally {
@@ -73,12 +71,10 @@ export default function PlacementRoadmap() {
   const generateRoadmap = async () => {
     setGenerating(true);
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/placement/generate-roadmap/${profileId}`,
-        { method: 'POST' }
+      const response = await api.post(
+        `/api/placement/generate-roadmap/${profileId}`
       );
-      const data = await response.json();
-      setRoadmap(data);
+      setRoadmap(response.data);
     } catch (error) {
       console.error('Failed to generate roadmap:', error);
       alert('Failed to generate roadmap');

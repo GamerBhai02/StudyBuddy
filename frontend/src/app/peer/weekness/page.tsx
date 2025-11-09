@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { TrendingDown, AlertCircle, Target, Calendar, BarChart3 } from 'lucide-react';
+import api from '@/lib/api';
 
 interface Weakness {
   topic: string;
@@ -19,9 +20,8 @@ export default function WeaknessAnalysis() {
 
   const loadWeaknesses = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/peer/group/1/weakness');
-      const data = await response.json();
-      setWeaknesses(data.weak_topics);
+      const response = await api.get('/api/peer/group/1/weakness');
+      setWeaknesses(response.data.weak_topics);
     } catch (error) {
       console.error('Failed to load weaknesses:', error);
     }

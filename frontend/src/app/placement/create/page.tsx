@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Briefcase, Calendar, Clock, Plus, Trash2, ArrowRight, Building2 } from 'lucide-react';
+import api from '@/lib/api';
 
 const ROUND_TYPES = [
   { value: 'aptitude', label: '📊 Aptitude Test', duration: 60 },
@@ -77,24 +78,15 @@ export default function CreatePlacementProfile() {
   setLoading(true);
 
   try {
-    const response = await fetch('http://localhost:8000/api/placement/profile', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        company_name: companyName,
-        role: role,
-        interview_date: interviewDate,
-        hours_per_day: hoursPerDay,
-        round_structure: rounds
-      })
+    const response = await api.post('/api/placement/profile', {
+      company_name: companyName,
+      role: role,
+      interview_date: interviewDate,
+      hours_per_day: hoursPerDay,
+      round_structure: rounds
     });
 
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.detail || 'Failed to create profile');
-    }
-
-    const data = await response.json();
+    const data = response.data;
     console.log('✅ Profile created:', data);
 
     // SUCCESS - REDIRECT TO DASHBOARD

@@ -17,6 +17,7 @@ import {
   ArrowRight,
   Map,
 } from 'lucide-react';
+import api from '@/lib/api';
 
 interface CompanyQuestions {
   company: string;
@@ -66,10 +67,10 @@ export default function PlacementDashboard() {
 
   const checkRoadmap = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/placement/roadmap/${profileId}`
+      const response = await api.get(
+        `/api/placement/roadmap/${profileId}`
       );
-      setHasRoadmap(response.ok);
+      setHasRoadmap(true);
     } catch (error) {
       setHasRoadmap(false);
     }
@@ -78,17 +79,17 @@ export default function PlacementDashboard() {
   const loadDashboardData = async () => {
     try {
       // Load profile
-      const profileRes = await fetch(
-        `http://localhost:8000/api/placement/profile/${profileId}`
+      const profileRes = await api.get(
+        `/api/placement/profile/${profileId}`
       );
-      const profileData = await profileRes.json();
+      const profileData = profileRes.data;
       setProfile(profileData);
 
       // Load company questions
-      const questionsRes = await fetch(
-        `http://localhost:8000/api/placement/company-questions/${profileData.company_name}?role=${profileData.role}`
+      const questionsRes = await api.get(
+        `/api/placement/company-questions/${profileData.company_name}?role=${profileData.role}`
       );
-      const questionsData = await questionsRes.json();
+      const questionsData = questionsRes.data;
       setQuestions(questionsData);
     } catch (error) {
       console.error('Failed to load dashboard:', error);
@@ -99,17 +100,12 @@ export default function PlacementDashboard() {
 
   const handleGenerateRoadmap = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/placement/generate-roadmap/${profileId}`,
-        { method: 'POST' }
+      const response = await api.post(
+        `/api/placement/generate-roadmap/${profileId}`
       );
 
-      if (response.ok) {
-        setHasRoadmap(true);
-        router.push(`/placement/roadmap?profileId=${profileId}`);
-      } else {
-        console.error('Failed to generate roadmap');
-      }
+      setHasRoadmap(true);
+      router.push(`/placement/roadmap?profileId=${profileId}`);
     } catch (error) {
       console.error('Error generating roadmap:', error);
     }

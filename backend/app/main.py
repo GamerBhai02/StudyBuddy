@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from app.config.database import init_database
+from app.config.settings import settings
 from app.routes import upload, study_plan, lessons, test_gemini, practice  # Add practice
 from app.models import models
 from app.routes import upload, study_plan, lessons, test_gemini, practice, srs
@@ -19,6 +20,7 @@ from app.routes import (
 )
 import traceback
 import logging
+import os
 
 # Configure logging
 logging.basicConfig(
@@ -65,10 +67,14 @@ async def global_exception_handler(request: Request, exc: Exception):
         }
     )
 
-# CORS
+# CORS configuration with environment variable support
+# Parse CORS_ORIGINS from settings (comma-separated list)
+cors_origins = [origin.strip() for origin in settings.CORS_ORIGINS.split(",")]
+logger.info(f"CORS enabled for origins: {cors_origins}")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -101,8 +107,18 @@ async def root():
         ]
     }
 
-@app.get("/health")
+@app.get("/api/health")
 async def health_check():
+    """Health check endpoint for monitoring"""
+    return {
+        "status": "healthy",
+        "phase": "3",
+        "features": ["chatbot", "practice", "exam-day"]
+    }
+
+@app.get("/health")
+async def health_check_alt():
+    """Alternative health check endpoint"""
     return {
         "status": "healthy",
         "phase": "3",
@@ -146,4 +162,6 @@ async def check_database():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.getenv("PORT", settings.PORT))
+    logger.info(f"Starting server on port {port}")
+    uvicorn.run(app, host="0.0.0.0", port=port)

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { MessageCircle, X, Send, Mic, Volume2, VolumeX, Minimize2, Maximize2, Settings } from 'lucide-react';
+import api from '@/lib/api';
 
 interface Message {
   id: number;
@@ -103,22 +104,16 @@ export default function GlobalChatbot() {
         context = "User is on peer learning page";
       }
 
-      const response = await fetch('http://localhost:8000/api/chatbot/query', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          query: inputText,
-          user_id: 1,
-          plan_id: null,
-          context: context
-        })
+      const response = await api.post('/api/chatbot/query', {
+        query: inputText,
+        user_id: 1,
+        plan_id: null,
+        context: context
       });
-
-      const data = await response.json();
 
       const botMessage: Message = {
         id: messages.length + 2,
-        text: data.response || "I'm having trouble understanding. Could you rephrase that?",
+        text: response.data.response || "I'm having trouble understanding. Could you rephrase that?",
         sender: 'bot',
         timestamp: new Date()
       };

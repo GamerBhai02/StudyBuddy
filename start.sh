@@ -14,7 +14,11 @@ if [ ! -f "backend/.env" ]; then
     echo -e "${YELLOW}Creating backend/.env template...${NC}"
     cat > backend/.env << 'EOF'
 DATABASE_URL=sqlite:///./studybuddy.db
+PORT=8000
+CORS_ORIGINS=http://localhost:3000
+FRONTEND_URL=http://localhost:3000
 SECRET_KEY=your-secret-key-change-this-in-production
+ALGORITHM=HS256
 GEMINI_API_KEY=your-gemini-api-key
 MISTRAL_API_KEY=your-mistral-api-key
 GROQ_API_KEY=your-groq-api-key
